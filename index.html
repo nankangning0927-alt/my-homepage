@@ -4,49 +4,79 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>南康宁 · 个人主页</title>
-  <meta name="description" content="极简个人主页，包含首页、作品与联系方式。" />
+  <meta name="description" content="南康宁的个人主页 —— 这里有我做过的事、相信的东西，以及找到我的方式。" />
   <style>
     :root {
-      --bg: #f7f7f5;
-      --card: #ffffff;
-      --text: #111111;
-      --muted: #666666;
-      --line: #e9e9e6;
-      --accent: #111111;
-      --max: 960px;
+      --bg: #0a0c10;
+      --bg-soft: #11141b;
+      --card: #131720;
+      --text: #e9edf4;
+      --muted: #8a94a6;
+      --line: #222836;
+      --accent: #5eead4;
+      --accent-2: #6aa3ff;
+      --max: 1000px;
+      --radius: 18px;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.7;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    a {
-      color: inherit;
-      text-decoration: none;
+    /* 背景光晕 */
+    body::before {
+      content: "";
+      position: fixed;
+      top: -20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 900px;
+      height: 900px;
+      background: radial-gradient(circle at center, rgba(106, 163, 255, 0.18), transparent 60%);
+      filter: blur(20px);
+      pointer-events: none;
+      z-index: 0;
     }
+
+    body::after {
+      content: "";
+      position: fixed;
+      bottom: -30%;
+      right: -10%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle at center, rgba(94, 234, 212, 0.12), transparent 60%);
+      filter: blur(20px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
 
     .wrap {
-      width: min(var(--max), calc(100% - 32px));
+      width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
+      position: relative;
+      z-index: 1;
     }
 
+    /* 导航 */
     .nav {
       position: sticky;
       top: 0;
-      background: rgba(247, 247, 245, 0.92);
-      backdrop-filter: blur(10px);
+      z-index: 10;
+      background: rgba(10, 12, 16, 0.7);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line);
     }
 
@@ -58,57 +88,92 @@
     }
 
     .brand {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .brand .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 12px var(--accent);
     }
 
     .nav-links {
       display: flex;
-      gap: 20px;
+      gap: 26px;
       color: var(--muted);
       font-size: 14px;
     }
 
+    .nav-links a { transition: color 0.2s ease; }
+    .nav-links a:hover { color: var(--text); }
+
     section {
-      padding: 72px 0;
+      padding: 88px 0;
       border-bottom: 1px solid var(--line);
     }
 
+    /* 首页 */
     .hero {
-      padding: 112px 0 88px;
+      padding: 130px 0 104px;
+      border-bottom: 1px solid var(--line);
     }
 
     .eyebrow {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 18px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--bg-soft);
     }
 
-    h1, h2, h3, p {
-      margin: 0;
+    .eyebrow::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
     }
+
+    h1, h2, h3, p { margin: 0; }
 
     h1 {
-      font-size: clamp(42px, 8vw, 80px);
-      line-height: 1.05;
-      letter-spacing: -0.04em;
-      max-width: 720px;
+      font-size: clamp(40px, 7.5vw, 76px);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      max-width: 760px;
+      font-weight: 800;
+    }
+
+    h1 .grad {
+      background: linear-gradient(120deg, var(--accent), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .lead {
-      margin-top: 22px;
-      max-width: 620px;
+      margin-top: 26px;
+      max-width: 600px;
       color: var(--muted);
-      font-size: 18px;
+      font-size: 19px;
     }
 
     .cta {
-      margin-top: 30px;
+      margin-top: 36px;
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
@@ -118,43 +183,73 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 12px 18px;
+      gap: 8px;
+      padding: 13px 22px;
       border-radius: 999px;
-      border: 1px solid var(--accent);
-      font-size: 14px;
-      transition: 0.2s ease;
+      border: 1px solid var(--line);
+      font-size: 15px;
+      font-weight: 500;
+      transition: 0.22s ease;
     }
 
     .btn.primary {
-      background: var(--accent);
-      color: #fff;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #05181a;
+      border-color: transparent;
+      font-weight: 600;
     }
 
     .btn.secondary {
       color: var(--text);
-      background: transparent;
-      border-color: var(--line);
+      background: var(--bg-soft);
     }
 
     .btn:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 26px rgba(94, 234, 212, 0.16);
     }
 
-    .section-head {
-      margin-bottom: 28px;
+    /* 区块标题 */
+    .section-head { margin-bottom: 40px; }
+
+    .section-num {
+      font-size: 13px;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      font-weight: 600;
     }
 
     h2 {
-      font-size: clamp(28px, 4vw, 42px);
+      font-size: clamp(30px, 4.5vw, 46px);
       letter-spacing: -0.03em;
-      margin-bottom: 10px;
+      margin: 8px 0 12px;
+      font-weight: 800;
     }
 
     .section-desc {
       color: var(--muted);
       max-width: 640px;
+      font-size: 17px;
     }
 
+    /* 关于：能力标签 */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .skills .tag {
+      font-size: 13px;
+      color: var(--text);
+      padding: 8px 15px;
+      border-radius: 999px;
+      background: var(--bg-soft);
+      border: 1px solid var(--line);
+    }
+
+    /* 作品 */
     .grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -162,77 +257,141 @@
     }
 
     .card {
+      position: relative;
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 20px;
-      padding: 24px;
+      border-radius: var(--radius);
+      padding: 28px;
+      overflow: hidden;
+      transition: 0.25s ease;
     }
 
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(94, 234, 212, 0.5), rgba(106, 163, 255, 0.3));
+      -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      background: var(--bg-soft);
+    }
+
+    .card:hover::before { opacity: 1; }
+
     .card h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
+      font-size: 21px;
+      margin-bottom: 12px;
+      font-weight: 700;
     }
 
     .card p {
       color: var(--muted);
-      margin-bottom: 16px;
+      margin-bottom: 18px;
+      font-size: 15px;
     }
 
     .tag {
       display: inline-block;
       font-size: 12px;
-      color: var(--muted);
-      padding: 6px 10px;
+      color: var(--accent);
+      padding: 6px 12px;
       border-radius: 999px;
-      background: #f2f2ef;
+      background: rgba(94, 234, 212, 0.08);
+      border: 1px solid rgba(94, 234, 212, 0.2);
     }
 
+    /* 联系 */
     .contact-box {
       background: var(--card);
       border: 1px solid var(--line);
       border-radius: 24px;
-      padding: 28px;
+      padding: 36px;
+    }
+
+    .contact-box > p {
+      font-size: 18px;
+      max-width: 560px;
     }
 
     .contact-list {
       display: grid;
-      gap: 12px;
-      margin-top: 20px;
-      color: var(--muted);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 28px;
     }
 
-    .contact-list strong {
+    .contact-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 16px 18px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      transition: 0.2s ease;
+    }
+
+    a.contact-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    .contact-item .label {
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .contact-item .value {
+      font-size: 16px;
       color: var(--text);
-      margin-right: 8px;
+      word-break: break-all;
     }
 
     .footer {
-      padding: 26px 0 42px;
+      padding: 32px 0 48px;
       color: var(--muted);
       font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
     }
 
     @media (max-width: 720px) {
       .nav-inner {
         flex-direction: column;
-        gap: 12px;
+        gap: 14px;
         align-items: flex-start;
       }
 
-      .grid {
+      .grid,
+      .contact-list {
         grid-template-columns: 1fr;
       }
 
-      .hero {
-        padding-top: 84px;
-      }
+      .hero { padding: 96px 0 72px; }
+
+      section { padding: 64px 0; }
+
+      .contact-box { padding: 26px; }
     }
   </style>
 </head>
 <body>
   <header class="nav">
     <div class="wrap nav-inner">
-      <div class="brand">Portfolio</div>
+      <div class="brand"><span class="dot"></span>南康宁</div>
       <nav class="nav-links">
         <a href="#home">首页</a>
         <a href="#work">作品</a>
@@ -243,65 +402,99 @@
 
   <main class="wrap">
     <section id="home" class="hero">
-      <span class="eyebrow">Minimal Personal Site</span>
-      <h1>你好，我是南康宁。<br />我做一些值得被看见的东西。</h1>
+      <span class="eyebrow">个人主页</span>
+      <h1>你好，我是南康宁。<br />我喜欢把想法<span class="grad">做成真实的东西</span>。</h1>
       <p class="lead">
-        我是一名产品设计师，专注把复杂的东西做得简单好用。
-        这里记录我做过的项目，以及你可以怎么找到我。
+        这里记录我做过的项目、相信的东西，以及你可以怎么找到我。
+        如果我们有机会合作或交流，欢迎随时联系。
       </p>
       <div class="cta">
-        <a class="btn primary" href="#work">查看作品</a>
+        <a class="btn primary" href="#work">查看作品 →</a>
         <a class="btn secondary" href="#contact">联系我</a>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="section-head">
+        <span class="section-num">01 / 关于</span>
+        <h2>关于我</h2>
+        <p class="section-desc">
+          一个喜欢动手、注重细节的人。习惯把复杂的问题拆开、想清楚，再用简单的方式把它做出来。
+          下面是我平时常打交道的一些方向：
+        </p>
+      </div>
+      <div class="skills">
+        <span class="tag">产品思考</span>
+        <span class="tag">设计</span>
+        <span class="tag">前端 / 网页</span>
+        <span class="tag">写作</span>
+        <span class="tag">持续学习</span>
       </div>
     </section>
 
     <section id="work">
       <div class="section-head">
-        <h2>作品</h2>
-        <p class="section-desc">这里是我最近做的两个项目。</p>
+        <span class="section-num">02 / 作品</span>
+        <h2>做过的事</h2>
+        <p class="section-desc">下面是几个示例项目。把它们替换成你真实的项目即可 —— 标题、一句话简介、加一个标签。</p>
       </div>
       <div class="grid">
         <article class="card">
-          <h3>极简记账 App</h3>
-          <p>一款主打"三秒记一笔"的记账工具，从交互到视觉独立完成，上线半年积累了一万名用户。</p>
-          <span class="tag">产品设计</span>
+          <h3>项目一</h3>
+          <p>用一两句话介绍这个项目：它解决了什么问题，你在其中做了什么，结果如何。</p>
+          <span class="tag">示例 · 待替换</span>
         </article>
         <article class="card">
-          <h3>个人作品集网站</h3>
-          <p>用纯手写 HTML/CSS 搭的极简主页，响应式适配手机与电脑，加载快、无依赖。</p>
-          <span class="tag">网页设计</span>
+          <h3>项目二</h3>
+          <p>这里是占位简介。说清楚项目的亮点，比如规模、效果，或者你最满意的部分。</p>
+          <span class="tag">示例 · 待替换</span>
         </article>
         <article class="card">
-          <h3>读书笔记小程序</h3>
-          <p>一个帮你随手记录读书摘录与想法的小工具，支持标签分类与每周回顾。</p>
-          <span class="tag">个人项目</span>
+          <h3>项目三</h3>
+          <p>占位内容。如果是个人作品，可以写写你的动机和过程；如果是协作项目，写写你的角色。</p>
+          <span class="tag">示例 · 待替换</span>
         </article>
         <article class="card">
-          <h3>新项目（占位）</h3>
-          <p>这里是占位简介，之后把它替换成你真实项目的一句话介绍即可。</p>
-          <span class="tag">个人项目</span>
+          <h3>项目四</h3>
+          <p>占位内容。之后随时可以用 /add-work 让 Claude 帮你再加一张卡片。</p>
+          <span class="tag">示例 · 待替换</span>
         </article>
       </div>
     </section>
 
     <section id="contact">
       <div class="section-head">
+        <span class="section-num">03 / 联系</span>
         <h2>联系方式</h2>
-        <p class="section-desc">把下面这些占位信息换成你自己的就可以直接用了。</p>
+        <p class="section-desc">对合作、交流或任何想聊的话题感兴趣？很高兴认识你。</p>
       </div>
       <div class="contact-box">
-        <p>如果你对合作、交流或者项目感兴趣，欢迎来联系我。</p>
+        <p>最快的方式是给我发邮件，我通常会在一两天内回复。</p>
         <div class="contact-list">
-          <div><strong>邮箱</strong> nankangning0927@gmail.com</div>
-          <div><strong>微信</strong> liming_design</div>
-          <div><strong>GitHub</strong> github.com/liming</div>
+          <a class="contact-item" href="mailto:nankangning0927@gmail.com">
+            <span class="label">邮箱</span>
+            <span class="value">nankangning0927@gmail.com</span>
+          </a>
+          <a class="contact-item" href="https://github.com/nankangning0927-alt" target="_blank" rel="noopener">
+            <span class="label">GitHub</span>
+            <span class="value">github.com/nankangning0927-alt</span>
+          </a>
+          <div class="contact-item">
+            <span class="label">微信</span>
+            <span class="value">待替换为你的微信号</span>
+          </div>
+          <div class="contact-item">
+            <span class="label">所在地</span>
+            <span class="value">待替换为你的城市</span>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="wrap footer">
-    © 2026 南康宁. All rights reserved.
+    <span>© 2026 南康宁</span>
+    <span>用 HTML / CSS 手写，无依赖。</span>
   </footer>
 </body>
 </html>
