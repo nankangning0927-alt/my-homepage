@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\":\"📢 部署提醒:本站经 GitHub Pages 从 main 分支发布。请在功能分支开发,确认无误后快进合并到 main(git push origin <feature-branch>:main)更新线上。\",\"hookSpecificOutput\":{\"hookEventName\":\"SessionStart\",\"additionalContext\":\"本项目部署方式:GitHub Pages 从 main 分支根目录发布;开发流程是功能分支开发后快进合并到 main。\"}}'"
+          }
+        ]
+      }
+    ]
+  }
+}
